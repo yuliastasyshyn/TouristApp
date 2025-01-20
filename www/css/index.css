@@ -1,4 +1,4 @@
-/* Загальні стилі */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,8 +7,8 @@
 }
 
 body {
-    background-color: #ffffff; /* Білий фон */
-    color: #666; /* Сірий текст */
+    background-color: #ffffff; 
+    color: #666; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,7 +18,7 @@ body {
     margin: 0;
 }
 
-/* Стилі для контейнера додатку */
+
 .app-container {
     background-color: #ffffff;
     border-radius: 12px;
@@ -33,15 +33,14 @@ body {
     transform: translateY(-10px);
 }
 
-/* Стилі заголовка */
 h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #666; /* Сірий текст */
+    color: #666; 
     font-weight: 600;
 }
 
-/* Стилі для кнопок */
+
 .btn {
     padding: 15px 40px;
     margin: 10px 0;
@@ -51,15 +50,15 @@ h1 {
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: none;
-    background-color: #ccc; /* Сірий фон кнопки */
-    color: #666; /* Сірий текст */
+    background-color: #ccc; 
+    color: #666; 
     font-weight: 600;
     position: relative;
     transition: all 0.3s ease-in-out;
 }
 
 .btn:hover {
-    background-color: #bbb; /* Темніший сірий при наведенні */
+    background-color: #bbb; 
     transform: scale(1.05);
 }
 
@@ -67,9 +66,9 @@ h1 {
     transform: scale(0.98);
 }
 
-/* Основні стилі для кожної кнопки */
+
 .btn.primary {
-    background-color: #ccc; /* Усі кнопки сірі */
+    background-color: #ccc; 
 }
 
 .btn.secondary {
@@ -95,20 +94,19 @@ a {
 }
 
 a:hover {
-    color: #444; /* Темніший сірий при наведенні */
+    color: #444; 
     text-decoration: underline;
 }
 
-/* Стилі для сторінки карти */
 #map {
-    height: 50vh; /* Зменшено висоту карти */
+    height: 50vh; 
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     margin-top: 20px;
 }
 
-/* Вдосконалений дизайн для мобільних пристроїв */
+
 @media (max-width: 768px) {
     .app-container {
         padding: 25px;
@@ -131,15 +129,15 @@ a:hover {
     }
 
     #map {
-        height: 40vh; /* Ще менша карта для мобільних пристроїв */
+        height: 40vh; 
     }
 }
 
-/* Немає темного кольору навіть у темній темі */
+
 @media screen and (prefers-color-scheme: dark) {
     body {
-        background-color: #ffffff; /* Білий фон */
-        color: #666; /* Сірий текст */
+        background-color: #ffffff; 
+        color: #666;
     }
 
     .app-container {
@@ -148,13 +146,13 @@ a:hover {
     }
 
     h1 {
-        color: #666; /* Сірий текст */
+        color: #666; 
     }
 
     .btn.primary,
     .btn.secondary,
     .btn.continue,
     .btn.map {
-        background-color: #ccc; /* Сірі кнопки */
+        background-color: #ccc; 
     }
 }
