@@ -10,29 +10,29 @@
 <body>
     <div class="app-container">
         <h1>Карта Львова</h1>
-        <!-- Додаємо контейнер для карти -->
+       
         <div id="map" style="height: 400px; width: 100%;"></div>
-        <button id="backBtn">Назад</button> <!-- Кнопка для повернення на головну сторінку -->
+        <button id="backBtn">Назад</button> 
     </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Створюємо мапу
-        var map = L.map('map').setView([49.8383, 24.0232], 13); // Центр на Львів
+       
+        var map = L.map('map').setView([49.8383, 24.0232], 13); 
 
-        // Додаємо базовий шар
+       
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Додаємо маркер
+       
         L.marker([49.8383, 24.0232]).addTo(map)
             .bindPopup('Ласкаво просимо до Львова!')
             .openPopup();
 
-        // Логіка для кнопки "Назад"
+       
         document.getElementById('backBtn').addEventListener('click', function() {
-            window.location.href = 'index.html'; // Переходимо назад на головну сторінку
+            window.location.href = 'index.html'; 
         });
     </script>
 </body>
