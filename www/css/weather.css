@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+.weather-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.weather-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.hourly-weather {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+.hourly-weather .hour {
+    background-color: #eaf4ff;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.hourly-weather .hour img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+.back-btn {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #151f2a;
+    padding: 10px 20px;
+    border-radius: 5px;
+}

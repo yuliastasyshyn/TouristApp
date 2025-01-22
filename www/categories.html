@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="css/categories.css">
+</head>
+<body>
+    <h1>Categories</h1>
+    <div class="button-container">
+        <button onclick="navigateTo('landmarks.html')">
+            <img src="img/landmarks.png" alt="Landmarks">
+            <span>Landmarks</span>
+        </button>
+        <button onclick="navigateTo('restaurants.html')">
+            <img src="img/logo.restaurants.jpg" alt="Restaurants">
+            <span>Restaurants</span>
+        </button>
+        <button onclick="navigateTo('shopping.html')">
+            <img src="img/shopping-logo.jpg" alt="Shopping">
+            <span>Shopping</span>
+        </button>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

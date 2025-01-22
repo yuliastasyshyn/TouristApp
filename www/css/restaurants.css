@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #314055;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #000000;
+}
+
+.restaurant-list {
+    list-style: none;
+    padding: 0;
+}
+
+.restaurant-item {
+    background-color: #d1e4ff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+.restaurant-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+.restaurant-info {
+    flex: 1;
+}
+
+.restaurant-info h2 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+    color: #123224;
+}
+
+.restaurant-info p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.restaurant-info a {
+    color: #123224;
+    text-decoration: none;
+}
+
+.restaurant-info a:hover {
+    text-decoration: underline;
+}
