@@ -61,7 +61,11 @@ h1 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: none;
     background-color: #ccc; 
+<<<<<<< HEAD
     color: #2b3736; 
+=======
+    color: #666; 
+>>>>>>> 3a51ffdea3e835c1d78b207b7a29023e754c8f39
     font-weight: 600;
     position: relative;
     transition: all 0.3s ease-in-out;
@@ -76,6 +80,10 @@ h1 {
     transform: scale(0.98);
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a51ffdea3e835c1d78b207b7a29023e754c8f39
 .btn.primary {
     background-color: #ccc; 
 }
@@ -103,12 +111,19 @@ a {
 }
 
 a:hover {
+<<<<<<< HEAD
     color: #444;
     text-decoration: underline;
 }
 
 
 
+=======
+    color: #444; 
+    text-decoration: underline;
+}
+
+>>>>>>> 3a51ffdea3e835c1d78b207b7a29023e754c8f39
 #map {
     height: 50vh; 
     width: 100%;
@@ -117,6 +132,10 @@ a:hover {
     margin-top: 20px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3a51ffdea3e835c1d78b207b7a29023e754c8f39
 @media (max-width: 768px) {
     .app-container {
         padding: 25px;
@@ -147,7 +166,11 @@ a:hover {
 @media screen and (prefers-color-scheme: dark) {
     body {
         background-color: #ffffff; 
+<<<<<<< HEAD
         color: #666; 
+=======
+        color: #666;
+>>>>>>> 3a51ffdea3e835c1d78b207b7a29023e754c8f39
     }
 
     .app-container {
@@ -156,7 +179,11 @@ a:hover {
     }
 
     h1 {
+<<<<<<< HEAD
         color: #666;
+=======
+        color: #666; 
+>>>>>>> 3a51ffdea3e835c1d78b207b7a29023e754c8f39
     }
 
     .btn.primary,
