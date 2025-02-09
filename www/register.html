@@ -21,49 +21,6 @@
         <p>Вже маєте акаунт? <a href="login.html">Увійти</a></p>
     </div>
 
-    <!-- Вставляємо JavaScript тут, перед закриваючим тегом </body> -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const form = document.querySelector("form");
-
-            form.addEventListener("submit", function(event) {
-                event.preventDefault(); // Запобігає перезавантаженню сторінки
-
-                const username = document.getElementById("username").value;
-                const password = document.getElementById("password").value;
-
-                if (!username || !password) {
-                    alert("Будь ласка, заповніть всі поля!");
-                    return;
-                }
-
-                const userData = {
-                    username: username,
-                    password: password
-                };
-
-                fetch('/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(userData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("Реєстрація успішна!");
-                        window.location.href = "login.html"; // Перехід на сторінку входу
-                    } else {
-                        alert("Помилка реєстрації: " + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Помилка:', error);
-                    alert('Сталася помилка при реєстрації');
-                });
-            });
-        });
-    </script>
+    <script src="js/register.js"></script>
 </body>
 </html>

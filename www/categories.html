@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories</title>
+    <title>Discover Lviv</title>
     <link rel="stylesheet" href="css/categories.css">
+    <script defer src="js/categories.js"></script>
 </head>
 <body>
-    <h1>Categories</h1>
-    <div class="button-container">
+    <header>
+        <h1>Discover Lviv</h1>
+        <p>Your guide to exploring the city</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search for attractions">
+        <button id="search-btn">🔍</button>
+        <p>Find restaurants, landmarks, and more</p>
+    </div>
+
+    <div class="map-container" onclick="navigateTo('map.html')">
+        <div class="map-placeholder">
+            <p>Explore the city of Lviv</p>
+        </div>
+    </div>
+
+    <div class="categories">
         <button onclick="navigateTo('landmarks.html')">
             <img src="img/landmarks.png" alt="Landmarks">
             <span>Landmarks</span>
@@ -23,10 +40,32 @@
         </button>
     </div>
 
-    <script>
-        function navigateTo(page) {
-            window.location.href = page;
-        }
-    </script>
+    <section class="top-attractions">
+        <h2>Top Attractions</h2>
+        <ul>
+            <li>Lviv Opera House</li>
+            <li>High Castle</li>
+        </ul>
+    </section>
+
+    <section class="reviews">
+        <h2>Visitor Reviews</h2>
+        <div class="review">
+            <h3>Anna ⭐⭐⭐⭐⭐</h3>
+            <p>Absolutely amazing experience</p>
+        </div>
+        <div class="review">
+            <h3>John ⭐⭐⭐⭐</h3>
+            <p>Must-visit destination!</p>
+        </div>
+    </section>
+
+    <section class="google-reviews">
+        <h2>Google Ratings</h2>
+        <iframe 
+            src="https://www.google.com/maps/embed/v1/place?q=Lviv&key=YOUR_GOOGLE_MAPS_API_KEY"
+            allowfullscreen>
+        </iframe>
+    </section>
 </body>
 </html>

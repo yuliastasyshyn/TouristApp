@@ -1,25 +1,23 @@
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
-    
+
     form.addEventListener("submit", function(event) {
         event.preventDefault(); 
 
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        
-       
+
         if (!username || !password) {
             alert("Будь ласка, заповніть всі поля!");
             return;
         }
 
-       
         const userData = {
             username: username,
             password: password
         };
 
-        fetch('/register', {
+        fetch('http://localhost:5000/register', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -30,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             if (data.success) {
                 alert("Реєстрація успішна!");
-                window.location.href = "login.html"; 
+                window.location.href = "categories.html"; 
             } else {
                 alert("Помилка реєстрації: " + data.message);
             }
