@@ -106,3 +106,60 @@ h1 {
     font-weight: bold;
     color: #333;
 }
+
+
+.city-info button {
+    width: 150px; 
+    height: 150px;
+    background: white;
+    border: 2px solid #ddd; 
+    border-radius: 10px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.city-info button:hover {
+    background-color: #f0f0f0;
+}
+
+
+.weather-btn {
+    width: 150px;
+    height: 150px;
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.3s;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.weather-btn img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.weather-btn span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.weather-btn:hover {
+    background-color: #f0f0f0;
+}
