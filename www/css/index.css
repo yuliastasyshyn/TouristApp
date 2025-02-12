@@ -1,0 +1,169 @@
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #ffffff; 
+    color: #666; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    font-size: 16px;
+    margin: 0;
+}
+
+
+.app-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 80%;
+    max-width: 500px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.app-container:hover {
+    transform: translateY(-10px);
+}
+img {
+    width: 100%; 
+    height: auto; 
+    margin: 10px 0;
+    border-radius: 10px; 
+    
+    object-fit: cover; 
+}
+
+
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #666; 
+    font-weight: 600;
+}
+
+
+.btn {
+    padding: 15px 40px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    background-color: #ccc; 
+    color: #2b3736; 
+    font-weight: 600;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background-color: #bbb; 
+    transform: scale(1.05);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn.primary {
+    background-color: #ccc; 
+}
+
+.btn.secondary {
+    background-color: #ccc;
+}
+
+.btn.continue {
+    background-color: #ccc;
+}
+
+.btn.map {
+    background-color: #ccc;
+}
+
+
+a {
+    color: #666; 
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    display: block;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #444;
+    text-decoration: underline;
+}
+
+
+
+#map {
+    height: 50vh; 
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: 25px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 12px 24px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+
+    #map {
+        height: 40vh; 
+    }
+}
+
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-color: #ffffff; 
+        color: #666; 
+    }
+
+    .app-container {
+        background-color: #ffffff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #666;
+    }
+
+    .btn.primary,
+    .btn.secondary,
+    .btn.continue,
+    .btn.map {
+        background-color: #ccc; 
+    }
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ресторани Львова</title>
+    <link rel="stylesheet" href="css/restaurants.css">
+</head>
+<body>
+    <h1>Топ найкращих закладів Львова</h1>
+    <ul class="restaurant-list" id="restaurantList"></ul>
+
+    <script>
+        async function fetchRestaurants() {
+            try {
+                const response = await fetch("http://localhost:5000/restaurants"); // Запит на сервер для отримання ресторанів
+                console.log("Відповідь сервера:", response);  
+                if (!response.ok) {
+                    throw new Error('Не вдалося отримати ресторани');
+                }
+
+                const restaurants = await response.json(); 
+                console.log("Дані ресторанів:", restaurants); 
+
+                const list = document.getElementById("restaurantList");
+
+                restaurants.forEach(restaurant => {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("restaurant-item");
+
+                    const restaurantImage = document.createElement("img");
+                    restaurantImage.src = restaurant.image;
+                    restaurantImage.alt = restaurant.name;
+
+                    const restaurantInfo = document.createElement("div"); 
+                    restaurantInfo.classList.add("restaurant-info");
+
+                    const restaurantName = document.createElement("h2");
+                    const restaurantLink = document.createElement("a");
+                    restaurantLink.href = restaurant.url;
+                    restaurantLink.target = "_blank";
+                    restaurantLink.textContent = restaurant.name;
+                    restaurantName.appendChild(restaurantLink);
+
+                    const restaurantDescription = document.createElement("p");
+                    restaurantDescription.textContent = restaurant.description;
+
+                    restaurantInfo.appendChild(restaurantName);
+                    restaurantInfo.appendChild(restaurantDescription);
+                    listItem.appendChild(restaurantImage);
+                    listItem.appendChild(restaurantInfo);
+                    list.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error("Помилка при отриманні ресторанів:", error); 
+            }
+        }
+
+        fetchRestaurants();
+    </script>
+</body>
+</html>

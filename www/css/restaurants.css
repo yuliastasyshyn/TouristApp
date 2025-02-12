@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #314055;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff; /* Змінено на білий, щоб виділялося на темному фоні */
+}
+
+.restaurant-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Додав відступи між елементами списку */
+}
+
+.restaurant-item {
+    background-color: #d1e4ff;
+    margin: 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.restaurant-item:hover {
+    transform: translateY(-5px); /* Легка анімація під час наведеного ефекту */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.restaurant-item img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    margin-right: 20px; /* Трохи більше відступу між зображенням та текстом */
+}
+
+.restaurant-info {
+    flex: 1;
+}
+
+.restaurant-info h2 {
+    margin: 0 0 10px;
+    font-size: 1.6em; /* Збільшено шрифт для заголовка */
+    color: #123224;
+}
+
+.restaurant-info p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 1em;
+}
+
+.restaurant-info a {
+    color: #123224;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.restaurant-info a:hover {
+    text-decoration: underline;
+}
+
+.restaurant-info a:active {
+    color: #f27c9b; /* Кольор для активного посилання */
+}

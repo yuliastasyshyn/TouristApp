@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>Персональний гід - Карта</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map {
+            height: 100%; 
+            width: 100%;  
+        }
+        button#backBtn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <button id="backBtn">Назад</button> 
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        
+        var map = L.map('map').setView([49.8383, 24.0232], 13); 
+
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        
+        L.marker([49.8383, 24.0232]).addTo(map)
+            .bindPopup('Ласкаво просимо до Львова!')
+            .openPopup();
+
+        
+        document.getElementById('backBtn').addEventListener('click', function() {
+            window.location.href = 'index.html'; 
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discover Lviv</title>
+  <link rel="stylesheet" href="css/categories.css" />
+  
+  <script defer src="js/categories.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Discover Lviv</h1>
+    <p class="subtitle">Your guide to exploring the city</p>
+  </header>
+
+  <div class="search-container">
+    <input type="text" id="search" placeholder="Search for attractions" />
+    <button id="search-btn">🔍</button>
+  </div>
+
+  <div class="map-container">
+   
+    <div id="map"></div>
+  </div>
+
+  <div class="categories">
+    <button onclick="navigateTo('landmarks.html')">
+      <img src="img/landmarks.png" alt="Landmarks" />
+      <span>Landmarks</span>
+    </button>
+    <button onclick="navigateTo('restaurants.html')">
+      <img src="img/logo.restaurants.jpg" alt="Restaurants" />
+      <span>Restaurants</span>
+    </button>
+    <button onclick="navigateTo('shopping.html')">
+      <img src="img/shopping-logo.jpg" alt="Shopping" />
+      <span>Shopping</span>
+    </button>
+  </div>
+</body>
+</html>
