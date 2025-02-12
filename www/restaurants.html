@@ -2,82 +2,61 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ресторани Львова</title>
     <link rel="stylesheet" href="css/restaurants.css">
 </head>
 <body>
     <h1>Топ найкращих закладів Львова</h1>
-    <ul class="restaurant-list">
-        <li class="restaurant-item">
-            <img src="img/baczewskich.jpg" alt="Ресторан Бачевських">
-            <div class="restaurant-info">
-                <h2><a href="https://baczewski.com.ua/">Ресторан Бачевських</a></h2>
-                <p>Вишукана галицька кухня в атмосфері старого Львова.</p>
-            </div>
-        </li>    
-        <li class="restaurant-item">
-            <img src="img/kryivka.jpg" alt="Криївка">
-            <div class="restaurant-info">
-                <h2><a href="https://www.fest.lviv.ua/uk/restaurants/kryjivka/">Криївка</a></h2>
-                <p>Тематика УПА з традиційними українськими стравами.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="img/mons-pius.jpg" alt="Mons Pius">
-            <div class="restaurant-info">
-                <h2><a href="https://monspius.com.ua/">Mons Pius</a></h2>
-                <p>М'ясні страви та широкий вибір пива в історичній будівлі.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="images/arsenal_ribs.jpg" alt="Реберня 'Під Арсеналом'">
-            <div class="restaurant-info">
-                <h2><a href="https://ribs.lviv.ua/">Реберня 'Під Арсеналом'</a></h2>
-                <p>Соковиті реберця, приготовані на відкритому вогні.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="images/amadeus.jpg" alt="Амадеус">
-            <div class="restaurant-info">
-                <h2><a href="https://amadeus.lviv.ua/">Амадеус</a></h2>
-                <p>Європейська кухня в елегантній атмосфері.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="images/valentino.jpg" alt="Валентино">
-            <div class="restaurant-info">
-                <h2><a href="https://valentino.lviv.ua/">Валентино</a></h2>
-                <p>Італійська кухня з панорамним видом на місто.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="images/culinary_studio.jpg" alt="Кулінарна студія 'Крива Липа'">
-            <div class="restaurant-info">
-                <h2><a href="https://kryvalypa.com.ua/">Кулінарна студія 'Крива Липа'</a></h2>
-                <p>Сучасна українська кухня в затишному інтер'єрі.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="images/green.jpg" alt="Green">
-            <div class="restaurant-info">
-                <h2><a href="https://green.lviv.ua/">Green</a></h2>
-                <p>Вегетаріанські та веганські страви в центрі міста.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="images/park_art.jpg" alt="Park. Art of Rest">
-            <div class="restaurant-info">
-                <h2><a href="https://parkartofrest.com.ua/">Park. Art of Rest</a></h2>
-                <p>Ресторан з літньою терасою та живою музикою.</p>
-            </div>
-        </li>
-        <li class="restaurant-item">
-            <img src="images/house_of_legends.jpg" alt="Дім Легенд">
-            <div class="restaurant-info">
-                <h2><a href="https://www.fest.lviv.ua/uk/restaurants/dim-legends/">Дім Легенд</a></h2>
-                <p>Тематика львівських легенд з унікальним інтер'єром.</p>
-            </div>
-        </li>
-    </ul>
+    <ul class="restaurant-list" id="restaurantList"></ul>
+
+    <script>
+        async function fetchRestaurants() {
+            try {
+                const response = await fetch("http://localhost:5000/restaurants"); 
+                console.log("Відповідь сервера:", response);  
+                if (!response.ok) {
+                    throw new Error('Не вдалося отримати ресторани');
+                }
+
+                const restaurants = await response.json(); 
+                console.log("Дані ресторанів:", restaurants); 
+
+                const list = document.getElementById("restaurantList");
+
+                restaurants.forEach(restaurant => {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("restaurant-item");
+
+                    const restaurantImage = document.createElement("img");
+                    restaurantImage.src = restaurant.image;
+                    restaurantImage.alt = restaurant.name;
+
+                    const restaurantInfo = document.createElement("div"); 
+                    restaurantInfo.classList.add("restaurant-info");
+
+                    const restaurantName = document.createElement("h2");
+                    const restaurantLink = document.createElement("a");
+                    restaurantLink.href = restaurant.url;
+                    restaurantLink.target = "_blank";
+                    restaurantLink.textContent = restaurant.name;
+                    restaurantName.appendChild(restaurantLink);
+
+                    const restaurantDescription = document.createElement("p");
+                    restaurantDescription.textContent = restaurant.description;
+
+                    restaurantInfo.appendChild(restaurantName);
+                    restaurantInfo.appendChild(restaurantDescription);
+                    listItem.appendChild(restaurantImage);
+                    listItem.appendChild(restaurantInfo);
+                    list.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error("Помилка при отриманні ресторанів:", error); 
+            }
+        }
+
+        fetchRestaurants();
+    </script>
 </body>
 </html>
