@@ -7,7 +7,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #ffffff; 
+    color: #ffffff;
 }
 
 .restaurant-list {
@@ -20,7 +20,6 @@ h1 {
 
 .restaurant-item {
     background-color: #d1e4ff;
-    margin: 0;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -30,7 +29,6 @@ h1 {
 }
 
 .restaurant-item:hover {
-    transform: translateY(-5px); 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -47,7 +45,7 @@ h1 {
 
 .restaurant-info h2 {
     margin: 0 0 10px;
-    font-size: 1.6em; 
+    font-size: 1.6em;
     color: #123224;
 }
 
@@ -57,16 +55,21 @@ h1 {
     font-size: 1em;
 }
 
-.restaurant-info a {
-    color: #123224;
-    text-decoration: none;
-    font-weight: bold;
+.restaurant-info .rating-stars {
+    font-size: 1.4em;
+    color: gold;
+    margin-bottom: 10px;
 }
 
-.restaurant-info a:hover {
-    text-decoration: underline;
+.restaurant-info button {
+    background-color: #16436f;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.restaurant-info a:active {
-    color: #f27c9b;
-}
+

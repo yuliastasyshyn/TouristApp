@@ -1,62 +1,95 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ресторани Львова</title>
-    <link rel="stylesheet" href="css/restaurants.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ресторани Львова</title>
+  <link rel="stylesheet" href="css/restaurants.css">
 </head>
 <body>
-    <h1>Топ найкращих закладів Львова</h1>
-    <ul class="restaurant-list" id="restaurantList"></ul>
+  <h1>Топ найкращих закладів Львова</h1>
+  <ul class="restaurant-list" id="restaurantList"></ul>
 
-    <script>
-        async function fetchRestaurants() {
-            try {
-                const response = await fetch("http://localhost:5000/restaurants"); 
-                console.log("Відповідь сервера:", response);  
-                if (!response.ok) {
-                    throw new Error('Не вдалося отримати ресторани');
-                }
-
-                const restaurants = await response.json(); 
-                console.log("Дані ресторанів:", restaurants); 
-
-                const list = document.getElementById("restaurantList");
-
-                restaurants.forEach(restaurant => {
-                    const listItem = document.createElement("li");
-                    listItem.classList.add("restaurant-item");
-
-                    const restaurantImage = document.createElement("img");
-                    restaurantImage.src = restaurant.image;
-                    restaurantImage.alt = restaurant.name;
-
-                    const restaurantInfo = document.createElement("div"); 
-                    restaurantInfo.classList.add("restaurant-info");
-
-                    const restaurantName = document.createElement("h2");
-                    const restaurantLink = document.createElement("a");
-                    restaurantLink.href = restaurant.url;
-                    restaurantLink.target = "_blank";
-                    restaurantLink.textContent = restaurant.name;
-                    restaurantName.appendChild(restaurantLink);
-
-                    const restaurantDescription = document.createElement("p");
-                    restaurantDescription.textContent = restaurant.description;
-
-                    restaurantInfo.appendChild(restaurantName);
-                    restaurantInfo.appendChild(restaurantDescription);
-                    listItem.appendChild(restaurantImage);
-                    listItem.appendChild(restaurantInfo);
-                    list.appendChild(listItem);
-                });
-            } catch (error) {
-                console.error("Помилка при отриманні ресторанів:", error); 
-            }
+  <script>
+    // Функція для отримання списку ресторанів
+    async function fetchRestaurants() {
+      try {
+        const response = await fetch("http://localhost:5000/restaurants"); 
+        if (!response.ok) {
+          throw new Error('Не вдалося отримати ресторани');
         }
+        const restaurants = await response.json();
+        const list = document.getElementById("restaurantList");
 
-        fetchRestaurants();
-    </script>
+        // Для кожного ресторану отримуємо середній рейтинг із відгуків
+        for (const restaurant of restaurants) {
+          // Створюємо елемент ресторану
+          const listItem = document.createElement("li");
+          listItem.classList.add("restaurant-item");
+
+          const restaurantImage = document.createElement("img");
+          restaurantImage.src = restaurant.image;
+          restaurantImage.alt = restaurant.name;
+
+          const restaurantInfo = document.createElement("div");
+          restaurantInfo.classList.add("restaurant-info");
+
+          const restaurantName = document.createElement("h2");
+          restaurantName.textContent = restaurant.name;
+
+          // Контейнер для зірочок рейтингу
+          const ratingStars = document.createElement("div");
+          ratingStars.classList.add("rating-stars");
+          // Спочатку покажемо завантаження
+          ratingStars.textContent = "Завантаження рейтингу...";
+
+          const restaurantDescription = document.createElement("p");
+          restaurantDescription.textContent = restaurant.description;
+
+          const reviewButton = document.createElement("button");
+          reviewButton.textContent = "Переглянути відгуки";
+          reviewButton.onclick = () => {
+            window.location.href = `reviews.html?restaurant_id=${restaurant.id}`;
+          };
+
+          restaurantInfo.appendChild(restaurantName);
+          restaurantInfo.appendChild(ratingStars);
+          restaurantInfo.appendChild(restaurantDescription);
+          restaurantInfo.appendChild(reviewButton);
+
+          listItem.appendChild(restaurantImage);
+          listItem.appendChild(restaurantInfo);
+          list.appendChild(listItem);
+
+          // Отримуємо середній рейтинг для цього ресторану та оновлюємо зірочки
+          const avgRating = await getAverageRating(restaurant.id);
+          const roundedRating = Math.round(avgRating); // округлюємо до цілого числа (1-5)
+          ratingStars.innerHTML = "⭐".repeat(roundedRating) + "☆".repeat(5 - roundedRating);
+        }
+      } catch (error) {
+        console.error("Помилка при отриманні ресторанів:", error); 
+      }
+    }
+
+    // Функція для отримання відгуків і обчислення середнього рейтингу
+    async function getAverageRating(restaurantId) {
+      try {
+        const response = await fetch(`http://localhost:5000/reviews?restaurant_id=${restaurantId}`);
+        if (!response.ok) {
+          console.error(`Помилка отримання відгуків для ресторану ${restaurantId}`);
+          return 0;
+        }
+        const reviews = await response.json();
+        if (reviews.length === 0) return 0;
+        const total = reviews.reduce((sum, review) => sum + Number(review.rating), 0);
+        return total / reviews.length;
+      } catch (error) {
+        console.error("Помилка обчислення рейтингу:", error);
+        return 0;
+      }
+    }
+
+    fetchRestaurants();
+  </script>
 </body>
 </html>
