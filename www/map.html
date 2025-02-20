@@ -6,7 +6,6 @@
     <title>Персональний гід - Карта</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
-        
         html, body {
             margin: 0;
             padding: 0;
@@ -33,24 +32,62 @@
     <button id="backBtn">Назад</button> 
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
     <script>
-        
         var map = L.map('map').setView([49.8383, 24.0232], 13); 
 
-    
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+       
+        function getTileLayer(lang) {
+            const tileLayers = {
+                en: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // Для англійської мови
+                uk: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // Для української мови
+            };
+            return tileLayers[lang];
+        }
+
+        // Функція для оновлення перекладів і карти
+        function applyTranslation(lang) {
+            const translations = {
+                en: {
+                    welcomeMessage: "Welcome to Lviv!",
+                    backBtnText: "Back"
+                },
+                uk: {
+                    welcomeMessage: "Ласкаво просимо до Львова!",
+                    backBtnText: "Назад"
+                }
+            };
+
+            // Оновлення карти
+            L.tileLayer(getTileLayer(lang), {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Оновлення маркера на карті
+            L.marker([49.8383, 24.0232]).addTo(map)
+                .bindPopup(translations[lang].welcomeMessage)
+                .openPopup();
+
+            // Оновлення кнопки назад
+            document.getElementById('backBtn').innerText = translations[lang].backBtnText;
+        }
+
+        // Отримуємо збережену мову або встановлюємо українську за замовчуванням
+        const savedLanguage = localStorage.getItem("language") || "uk";  
+        applyTranslation(savedLanguage); 
 
         
-        L.marker([49.8383, 24.0232]).addTo(map)
-            .bindPopup('Ласкаво просимо до Львова!')
-            .openPopup();
+        window.changeLanguage = function(lang) {
+            localStorage.setItem("language", lang);  // Зберігаємо вибрану мову
+            applyTranslation(lang);  // Оновлюємо переклад
+        };
 
-        
         document.getElementById('backBtn').addEventListener('click', function() {
             window.location.href = 'index.html'; 
         });
     </script>
+
+    <script src="js/translations.js"></script> 
+    <script src="js/map.js"></script>
 </body>
 </html>

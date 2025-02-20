@@ -8,19 +8,20 @@
 </head>
 <body>
     <div class="app-container">
-        <h1>Увійти</h1>
+        <h1 id="title">Вхід</h1>
         <form>
-            <label for="username">Ім'я користувача</label>
+            <label id="label-username" for="username">Ім'я користувача</label>
             <input type="text" id="username" name="username" required><br>
             
-            <label for="password">Пароль</label>
+            <label id="label-password" for="password">Пароль</label>
             <input type="password" id="password" name="password" required><br>
 
-            <button type="submit" class="btn-login">Увійти</button>
+            <button type="submit" class="btn-login" id="btn-login">Увійти</button>
         </form>
-        <p>Ще не маєте акаунта? <a href="register.html">Зареєструватися</a></p>
+        <p id="register-link">Ще не маєте акаунта? <a href="register.html">Зареєструватися</a></p>
     </div>
-    <!-- Підключення login.js -->
-    <script src="js/login.js"></script>
+
+    <script src="js/translations.js"></script> 
+    <script src="js/login.js"></script> 
 </body>
 </html>

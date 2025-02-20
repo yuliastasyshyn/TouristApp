@@ -4,8 +4,7 @@ function onDeviceReady() {
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
 
-
-    var map = L.map('map').setView([49.8383, 24.0232], 13); 
+    var map = L.map('map').setView([49.8383, 24.0232], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -33,6 +32,7 @@ document.getElementById('mapBtn').addEventListener('click', function() {
     window.location.href = 'map.html';
 });
 
-function handleClick(buttonName) {
-    alert(`Ви натиснули: ${buttonName}`);
+function changeLanguage(lang) {
+    localStorage.setItem('selectedLanguage', lang);
+    location.reload();
 }
