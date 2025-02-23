@@ -216,4 +216,48 @@ body {
     }
 }
 
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
 
+.action-buttons button {
+    width: 150px;
+    height: 150px;
+    background: var(--button-bg);
+    border: 2px solid var(--button-border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action-buttons button:hover {
+    background-color: var(--button-hover);
+}
+
+.action-buttons button span {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Картинка на кнопці 
+.action-buttons button img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+*/
+
+#draw-btn, #clear-btn {
+    display: none;
+  }
+  

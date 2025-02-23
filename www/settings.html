@@ -3,5 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Налаштування</title>
     <link rel="stylesheet" href="css/settings.css">
 </head>
+<body>
+    <div class="settings-container">
+        <h2>Налаштування</h2>
+
+        <div class="setting-item">
+            <span>Мова додатку</span>
+            <button id="language-btn">Українська</button>
+            <div class="dropdown" id="language-dropdown">
+                <div data-lang="en">English</div>
+                
+                <div data-lang="uk">Українська</div>
+            </div>
+        </div>
+
+        <div class="setting-item">
+            <span>Тема оформлення</span>
+            <button id="theme-btn">Світла</button>
+            <div class="dropdown" id="theme-dropdown">
+                <div data-theme="light">Світла</div>
+                <div data-theme="dark">Темна</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/settings.js"></script>
+</body>
+</html>

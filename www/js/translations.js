@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Встановлюємо мову при завантаженні сторінки
     const savedLanguage = localStorage.getItem("language") || "uk";  
     applyTranslations(savedLanguage);
 

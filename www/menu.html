@@ -10,29 +10,8 @@
     <div class="container">
         <h1 class="title">Твій персональний гід по місту Лева!</h1>
 
-        <p class="subtitle">Не знаєш, що відвідати?</p>
-        <a href="landmarks.html" class="image-button">
-            <img src="https://vgorode.ua/img/article/11859/59_main-v1637140503.jpg" alt="Знакові місця">
-            <span>Визначні місця</span>
-        </a>
+        <div id="menu-items"></div>  
 
-        <p class="subtitle">Думаєш, де поїсти?</p>
-        <a href="restaurants.html" class="image-button">
-            <img src="https://horeca-ukraine.com/wp-content/uploads/2021/12/1385183471001-2-lemeurice-DorchesterCollection.jpg" alt="Ресторани">
-            <span>Заклади</span>
-        </a>
-
-        <p class="subtitle">Бажаєш піти на шопінг?</p>
-        <a href="shopping.html" class="image-button">
-            <img src="https://lviv.travel/image/news/c6/ec/c6ecb09f9959e0c800b66902472c8b02c6638015_1580736449.jpg?crop=5149%2C3446%2C82%2C0" alt="Магазини">
-            <span>Магазини</span>
-        </a>
-
-        <p class="subtitle">Вагаєшся, що одягнути? Глянь погоду!</p>
-        <a href="weather.html" class="image-button">
-            <img src="https://i.pinimg.com/736x/4a/b2/47/4ab24761e7da378406ce980a838feeb6.jpg" alt="Погода">
-            <span>Погода</span>
-        </a>
     </div>
 
     <div class="bottom-panel">
@@ -52,6 +31,40 @@
             </button>
         </a>
     </div>
+
+    <script>
+        
+        fetch('http://localhost:5000/menu')  
+            .then(response => response.json())
+            .then(data => {
+                const menuContainer = document.getElementById('menu-items');
+                data.forEach(item => {
+                   
+                    const menuSection = document.createElement('div');
+                    menuSection.classList.add('menu-section');
+
+                   
+                    const subtitle = document.createElement('p');
+                    subtitle.classList.add('subtitle');
+                    subtitle.textContent = item.subtitle;
+                    menuSection.appendChild(subtitle);
+
+                    
+                    const menuItem = document.createElement('a');
+                    menuItem.href = item.link;
+                    menuItem.classList.add('image-button');
+                    menuItem.innerHTML = `
+                        <img src="${item.image_url}" alt="${item.title}">
+                        <span>${item.title}</span>
+                    `;
+                    menuSection.appendChild(menuItem);
+
+                  
+                    menuContainer.appendChild(menuSection);
+                });
+            })
+            .catch(err => console.error('❌ Помилка при завантаженні меню:', err));
+    </script>
 
     <script src="js/translations.js"></script>
 </body>

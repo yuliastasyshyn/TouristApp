@@ -161,4 +161,101 @@ const themeToggle = document.getElementById("theme-toggle");
       alert("Місце не знайдено!");
     }
   });
+  
+  
+  var drawButton = document.createElement("button");
+  drawButton.textContent = "Обвести фрагмент";
+  drawButton.style.position = "absolute";
+  drawButton.style.top = "10px";
+  drawButton.style.right = "10px";
+  drawButton.style.zIndex = "1000";
+  drawButton.style.padding = "10px";
+  drawButton.style.backgroundColor = "#fff";
+  drawButton.style.border = "2px solid black";
+  drawButton.style.cursor = "pointer";
+  document.body.appendChild(drawButton);
+  
+  
+  var drawnItems = new L.FeatureGroup();
+  map.addLayer(drawnItems);
+  
+  
+  var markersInPolygonLayer = new L.LayerGroup();
+  map.addLayer(markersInPolygonLayer);
+  
+  var drawControl = new L.Control.Draw({
+      edit: { featureGroup: drawnItems },
+      draw: {
+          polyline: false,
+          rectangle: false,
+          circle: false,
+          marker: false,
+          circlemarker: false,
+          polygon: {
+              shapeOptions: { color: 'blue' }
+          }
+      }
+  });
+  
+  
+  drawButton.addEventListener("click", function () {
+      map.addControl(drawControl);
+  });
+  
+  
+  map.on(L.Draw.Event.CREATED, function (event) {
+      var layer = event.layer;
+      drawnItems.addLayer(layer);
+  
+    
+      var polygon = layer.toGeoJSON();
+      var polygonLatLngs = polygon.geometry.coordinates[0].map(coord => [coord[0], coord[1]]); 
+  
+      
+      var markersInside = [];
+      markersInPolygonLayer.clearLayers();  
+  
+      [...landmarkMarkers, ...restaurantMarkers, ...shoppingMarkers].forEach(obj => {
+          var latlng = obj.marker.getLatLng();
+         
+          if (turf.booleanPointInPolygon(turf.point([latlng.lng, latlng.lat]), turf.polygon([polygonLatLngs]))) {
+              markersInside.push(obj.name);
+             
+              var markerInPolygon = L.marker(latlng, { icon: redIcon }).addTo(markersInPolygonLayer);
+              markerInPolygon.bindPopup(`<b>${obj.name}</b>`); 
+          }
+      });
+  
+      
+      if (markersInside.length > 0) {
+          alert("Мітки в обведеній області:\n" + markersInside.join("\n"));
+      } else {
+          alert("Жодна мітка не потрапила у вибраний фрагмент.");
+        }
+      });
+
+var clearButton = document.createElement("button");
+clearButton.textContent = "Очистити все";
+clearButton.style.position = "absolute";
+clearButton.style.top = "50px";
+clearButton.style.right = "10px";
+clearButton.style.zIndex = "1000";
+clearButton.style.padding = "10px";
+clearButton.style.backgroundColor = "#fff";
+clearButton.style.border = "2px solid black";
+clearButton.style.cursor = "pointer";
+document.body.appendChild(clearButton);
+
+clearButton.addEventListener("click", function () {
+  
+    markersInPolygonLayer.clearLayers();
+
+    
+    drawnItems.clearLayers();
+
+    
+    map.setView([49.8397, 24.0297], 13);
 });
+ 
+      
+  });

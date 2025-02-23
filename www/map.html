@@ -39,13 +39,13 @@
        
         function getTileLayer(lang) {
             const tileLayers = {
-                en: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // Для англійської мови
-                uk: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', // Для української мови
+                en: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
+                uk: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
             };
             return tileLayers[lang];
         }
 
-        // Функція для оновлення перекладів і карти
+        
         function applyTranslation(lang) {
             const translations = {
                 en: {
@@ -58,28 +58,28 @@
                 }
             };
 
-            // Оновлення карти
+            
             L.tileLayer(getTileLayer(lang), {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Оновлення маркера на карті
+            
             L.marker([49.8383, 24.0232]).addTo(map)
                 .bindPopup(translations[lang].welcomeMessage)
                 .openPopup();
 
-            // Оновлення кнопки назад
+            
             document.getElementById('backBtn').innerText = translations[lang].backBtnText;
         }
 
-        // Отримуємо збережену мову або встановлюємо українську за замовчуванням
+       
         const savedLanguage = localStorage.getItem("language") || "uk";  
         applyTranslation(savedLanguage); 
 
         
         window.changeLanguage = function(lang) {
-            localStorage.setItem("language", lang);  // Зберігаємо вибрану мову
-            applyTranslation(lang);  // Оновлюємо переклад
+            localStorage.setItem("language", lang);  
+            applyTranslation(lang); 
         };
 
         document.getElementById('backBtn').addEventListener('click', function() {

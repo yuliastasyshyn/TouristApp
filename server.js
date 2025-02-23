@@ -16,7 +16,6 @@ app.use(cors({
 
 app.use(express.json());
 
-// Налаштування підключення до PostgreSQL
 const pool = new Pool({
     user: 'postgres',          
     host: 'localhost',         
@@ -33,7 +32,7 @@ pool.connect()
         process.exit(1);
     });
 
-// --------------------- КОРИСТУВАЧІ ---------------------
+
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
 
@@ -98,7 +97,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// --------------------- РЕСТОРАНИ ---------------------
+
 app.get('/restaurants', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM restaurants');
@@ -135,9 +134,9 @@ app.delete('/restaurants/:id', async (req, res) => {
     }
 });
 
-// --------------------- ВІДГУКИ ---------------------
 
-// Отримати відгуки (через ?restaurant_id=1)
+
+
 app.get('/reviews', async (req, res) => {
     const { restaurant_id } = req.query;
 
@@ -157,7 +156,7 @@ app.get('/reviews', async (req, res) => {
     }
 });
 
-// Оновлення середнього рейтингу в таблиці restaurants
+
 async function updateRestaurantRating(restaurantId) {
     try {
         const result = await pool.query(
@@ -177,7 +176,7 @@ async function updateRestaurantRating(restaurantId) {
     }
 }
 
-// Модифікований POST /reviews
+
 app.post('/reviews', async (req, res) => {
     const { restaurant_id, rating, comment, username } = req.body;
 
@@ -191,7 +190,7 @@ app.post('/reviews', async (req, res) => {
             [restaurant_id, rating, comment, username || 'Anonymous']
         );
 
-        // Оновлення рейтингу після додавання відгуку
+        
         await updateRestaurantRating(restaurant_id);
 
         res.status(201).json({ success: true, message: '✅ Відгук додано успішно!' });
@@ -202,7 +201,7 @@ app.post('/reviews', async (req, res) => {
 });
 
 
-// Отримання середнього рейтингу ресторану
+
 app.get('/restaurants/:id/rating', async (req, res) => {
     const { id } = req.params;
     try {
@@ -219,7 +218,7 @@ app.get('/restaurants/:id/rating', async (req, res) => {
 });
 
 
-// --------------------- LANDMARKS ---------------------
+
 app.get('/landmarks', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM landmarks');
@@ -256,7 +255,7 @@ app.delete('/landmarks/:id', async (req, res) => {
     }
 });
 
-// --------------------- SHOPPING ---------------------
+
 app.get('/shopping', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM shopping');
@@ -293,7 +292,19 @@ app.delete('/shopping/:id', async (req, res) => {
     }
 });
 
-// --------------------- ЗАПУСК СЕРВЕРА ---------------------
+
+
+app.get('/menu', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM menu');  
+        res.json(result.rows);
+    } catch (err) {
+        console.error('❌ Помилка при отриманні меню:', err);
+        res.status(500).json({ error: 'Помилка сервера' });
+    }
+});
+
+
 const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Сервер запущено на порту ${PORT}`);
