@@ -20,7 +20,7 @@ const pool = new Pool({
     user: 'postgres',          
     host: 'localhost',         
     database: 'registration_db', 
-    password: '090705',          
+    password: '1234',          
     port: 5432                
 });
 
@@ -156,9 +156,28 @@ app.get('/reviews', async (req, res) => {
     }
 });
 
-// Додати відгук (один маршрут, без дублювання)
+// Оновлення середнього рейтингу в таблиці restaurants
+async function updateRestaurantRating(restaurantId) {
+    try {
+        const result = await pool.query(
+            'SELECT AVG(rating) AS average_rating FROM reviews WHERE restaurant_id = $1',
+            [restaurantId]
+        );
+        const averageRating = result.rows[0].average_rating;
+
+        await pool.query(
+            'UPDATE restaurants SET rating = $1 WHERE id = $2',
+            [averageRating, restaurantId]
+        );
+
+        console.log(`✅ Середній рейтинг ресторану ID ${restaurantId} оновлено: ${averageRating}`);
+    } catch (err) {
+        console.error('❌ Помилка при оновленні рейтингу ресторану:', err);
+    }
+}
+
+// Модифікований POST /reviews
 app.post('/reviews', async (req, res) => {
-    // Зверніть увагу: клієнт надсилає поле "restaurant_id", а не "restaurantId"
     const { restaurant_id, rating, comment, username } = req.body;
 
     if (!restaurant_id || !rating || !comment) {
@@ -171,10 +190,105 @@ app.post('/reviews', async (req, res) => {
             [restaurant_id, rating, comment, username || 'Anonymous']
         );
 
+        // Оновлення рейтингу після додавання відгуку
+        await updateRestaurantRating(restaurant_id);
+
         res.status(201).json({ success: true, message: '✅ Відгук додано успішно!' });
     } catch (err) {
         console.error('❌ Помилка сервера:', err);
         res.status(500).json({ success: false, message: 'Не вдалося додати відгук.' });
+    }
+});
+
+
+// Отримання середнього рейтингу ресторану
+app.get('/restaurants/:id/rating', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await pool.query('SELECT rating FROM restaurants WHERE id = $1', [id]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ success: false, message: 'Ресторан не знайдено' });
+        }
+
+        res.json({ averageRating: result.rows[0].rating });
+    } catch (err) {
+        console.error('❌ Помилка при отриманні рейтингу ресторану:', err);
+        res.status(500).json({ success: false, message: 'Помилка сервера' });
+    }
+});
+
+
+// --------------------- LANDMARKS ---------------------
+app.get('/landmarks', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM landmarks');
+        res.json(result.rows);
+    } catch (err) {
+        console.error('❌ Помилка при отриманні пам’яток:', err);
+        res.status(500).json({ error: 'Помилка сервера' });
+    }
+});
+
+app.post('/landmarks', async (req, res) => {
+    const { name, location, description, image } = req.body;
+
+    try {
+        const result = await pool.query(
+            'INSERT INTO landmarks (name, location, description, image) VALUES ($1, $2, $3, $4) RETURNING *',
+            [name, location, description, image]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (err) {
+        console.error('❌ Помилка при додаванні пам’ятки:', err);
+        res.status(500).json({ error: 'Помилка сервера' });
+    }
+});
+
+app.delete('/landmarks/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await pool.query('DELETE FROM landmarks WHERE id = $1', [id]);
+        res.json({ message: 'Пам’ятка видалена' });
+    } catch (err) {
+        console.error('❌ Помилка при видаленні пам’ятки:', err);
+        res.status(500).json({ error: 'Помилка сервера' });
+    }
+});
+
+// --------------------- SHOPPING ---------------------
+app.get('/shopping', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM shopping');
+        res.json(result.rows);
+    } catch (err) {
+        console.error('❌ Помилка при отриманні магазинів:', err);
+        res.status(500).json({ error: 'Помилка сервера' });
+    }
+});
+
+app.post('/shopping', async (req, res) => {
+    const { name, location, description, image } = req.body;
+
+    try {
+        const result = await pool.query(
+            'INSERT INTO shopping (name, location, description, image) VALUES ($1, $2, $3, $4) RETURNING *',
+            [name, location, description, image]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (err) {
+        console.error('❌ Помилка при додаванні магазину:', err);
+        res.status(500).json({ error: 'Помилка сервера' });
+    }
+});
+
+app.delete('/shopping/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await pool.query('DELETE FROM shopping WHERE id = $1', [id]);
+        res.json({ message: 'Магазин видалено' });
+    } catch (err) {
+        console.error('❌ Помилка при видаленні магазину:', err);
+        res.status(500).json({ error: 'Помилка сервера' });
     }
 });
 

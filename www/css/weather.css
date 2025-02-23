@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Georgia, serif;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
@@ -22,7 +22,7 @@ body {
     gap: 20px;
 }
 .hourly-weather .hour {
-    background-color: #eaf4ff;
+    background-color: #c4c9fd;
     border-radius: 5px;
     padding: 10px;
     text-align: center;

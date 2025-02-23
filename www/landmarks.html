@@ -1,1 +1,61 @@
-<h1>Landmarks Page</h1>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Визначні місця Львова</title>
+  <link rel="stylesheet" href="css/landmarks.css">
+</head>
+<body>
+  <h1>Визначні місця Львова</h1>
+  <ul class="landmark-list" id="landmarkList"></ul>
+
+  <script>
+    async function fetchLandmarks() {
+      try {
+        const response = await fetch("http://localhost:5000/landmarks");
+        if (!response.ok) {
+          throw new Error('Не вдалося отримати дані');
+        }
+        const landmarks = await response.json();
+        const list = document.getElementById("landmarkList");
+
+        landmarks.forEach(landmark => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("landmark-item");
+
+          const landmarkImage = document.createElement("img");
+          landmarkImage.src = landmark.image_url;
+          landmarkImage.alt = landmark.name;
+
+          const landmarkInfo = document.createElement("div");
+          landmarkInfo.classList.add("landmark-info");
+
+          const landmarkName = document.createElement("h2");
+          landmarkName.textContent = landmark.name;
+
+          const landmarkDescription = document.createElement("p");
+          landmarkDescription.textContent = landmark.description;
+
+          const landmarkLink = document.createElement("a");
+          landmarkLink.href = landmark.link;
+          landmarkLink.textContent = "Детальніше";
+          landmarkLink.target = "_blank";
+
+          landmarkInfo.appendChild(landmarkName);
+          landmarkInfo.appendChild(landmarkDescription);
+          landmarkInfo.appendChild(landmarkLink);
+
+          listItem.appendChild(landmarkImage);
+          listItem.appendChild(landmarkInfo);
+          list.appendChild(listItem);
+        });
+      } catch (error) {
+        console.error("Помилка завантаження даних:", error);
+      }
+    }
+
+    fetchLandmarks();
+  </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 body {
     font-family: Georgia, serif;
-    background-color: #3d6f67;
+    background-color: #774e4e;
     margin: 0;
     padding: 20px;
 }
@@ -10,7 +10,7 @@ h1 {
     color: #ffffff;
 }
 
-.list {
+.landmark-list {
     list-style: none;
     padding: 0;
     display: flex;
@@ -18,8 +18,8 @@ h1 {
     gap: 20px;
 }
 
-.item {
-    background-color: #8dc1bc;
+.landmark-item {
+    background-color: #ffe1e1;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -28,35 +28,40 @@ h1 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.item:hover {
+.landmark-item:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.item img {
+.landmark-item img {
     width: 120px;
     height: 120px;
     border-radius: 8px;
     margin-right: 20px;
 }
 
-.info {
+.landmark-info {
     flex: 1;
 }
 
-.info h2 {
+.landmark-info h2 {
     margin: 0 0 10px;
     font-size: 1.6em;
     color: #123224;
 }
 
-.info p {
+.landmark-info p {
     margin: 5px 0;
     color: #555;
     font-size: 1em;
 }
 
-.info a {
-    background-color: #07534b;
+
+.landmark-info a:hover {
+    background-color: #550f0f;
+}
+
+.landmark-info a {
+    background-color: #580000;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -65,8 +70,9 @@ h1 {
     border-radius: 5px;
     transition: background-color 0.3s ease;
     text-decoration: none;
+    display: inline-block; 
+    margin: 10px auto; 
+    text-align: center;
+    min-width: 100px; 
 }
 
-.info a:hover {
-    background-color: #0f3055;
-}

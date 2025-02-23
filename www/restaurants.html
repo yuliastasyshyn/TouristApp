@@ -11,19 +11,16 @@
   <ul class="restaurant-list" id="restaurantList"></ul>
 
   <script>
-    // Функція для отримання списку ресторанів
     async function fetchRestaurants() {
       try {
-        const response = await fetch("http://localhost:5000/restaurants"); 
+        const response = await fetch("http://localhost:5000/restaurants");
         if (!response.ok) {
           throw new Error('Не вдалося отримати ресторани');
         }
         const restaurants = await response.json();
         const list = document.getElementById("restaurantList");
 
-        // Для кожного ресторану отримуємо середній рейтинг із відгуків
         for (const restaurant of restaurants) {
-          // Створюємо елемент ресторану
           const listItem = document.createElement("li");
           listItem.classList.add("restaurant-item");
 
@@ -35,19 +32,28 @@
           restaurantInfo.classList.add("restaurant-info");
 
           const restaurantName = document.createElement("h2");
-          restaurantName.textContent = restaurant.name;
 
-          // Контейнер для зірочок рейтингу
+          
+          if (restaurant.url) {
+            console.log(`Посилання для ${restaurant.name}:`, restaurant.url);
+            const restaurantLink = document.createElement("a");
+            restaurantLink.href = restaurant.url;
+            restaurantLink.textContent = restaurant.name;
+            restaurantLink.target = "_blank"; 
+            restaurantName.appendChild(restaurantLink); 
+          } else {
+            restaurantName.textContent = restaurant.name;
+          }
+
           const ratingStars = document.createElement("div");
           ratingStars.classList.add("rating-stars");
-          // Спочатку покажемо завантаження
           ratingStars.textContent = "Завантаження рейтингу...";
 
           const restaurantDescription = document.createElement("p");
           restaurantDescription.textContent = restaurant.description;
 
           const reviewButton = document.createElement("button");
-          reviewButton.textContent = "Переглянути відгуки";
+          reviewButton.textContent = "Переглянути/залишити відгук";
           reviewButton.onclick = () => {
             window.location.href = `reviews.html?restaurant_id=${restaurant.id}`;
           };
@@ -61,17 +67,15 @@
           listItem.appendChild(restaurantInfo);
           list.appendChild(listItem);
 
-          // Отримуємо середній рейтинг для цього ресторану та оновлюємо зірочки
           const avgRating = await getAverageRating(restaurant.id);
-          const roundedRating = Math.round(avgRating); // округлюємо до цілого числа (1-5)
+          const roundedRating = Math.round(avgRating);
           ratingStars.innerHTML = "⭐".repeat(roundedRating) + "☆".repeat(5 - roundedRating);
         }
       } catch (error) {
-        console.error("Помилка при отриманні ресторанів:", error); 
+        console.error("Помилка при отриманні ресторанів:", error);
       }
     }
 
-    // Функція для отримання відгуків і обчислення середнього рейтингу
     async function getAverageRating(restaurantId) {
       try {
         const response = await fetch(`http://localhost:5000/reviews?restaurant_id=${restaurantId}`);

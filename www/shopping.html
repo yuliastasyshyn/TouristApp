@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шопінг у Львові</title>
+  <link rel="stylesheet" href="css/shopping.css">
+</head>
+<body>
+  <h1>Популярні торгові центри Львова</h1>
+  <ul class="list" id="shopList"></ul>
+
+  <script>
+    async function fetchShops() {
+      try {
+        const response = await fetch("http://localhost:5000/shopping");
+        if (!response.ok) {
+          throw new Error('Не вдалося отримати дані');
+        }
+        const shops = await response.json();
+        const list = document.getElementById("shopList");
+
+        shops.forEach(shop => {
+          const listItem = document.createElement("li");
+          listItem.classList.add("item");
+
+          const shopImage = document.createElement("img");
+          shopImage.src = shop.image_url;
+          shopImage.alt = shop.name;
+
+          const shopInfo = document.createElement("div");
+          shopInfo.classList.add("info");
+
+          const shopName = document.createElement("h2");
+          shopName.textContent = shop.name;
+
+          const shopDescription = document.createElement("p");
+          shopDescription.textContent = shop.description;
+
+          const shopLink = document.createElement("a");
+          shopLink.href = shop.link;
+          shopLink.textContent = "Перейти";
+          shopLink.target = "_blank";
+
+          shopInfo.appendChild(shopName);
+          shopInfo.appendChild(shopDescription);
+          shopInfo.appendChild(shopLink);
+
+          listItem.appendChild(shopImage);
+          listItem.appendChild(shopInfo);
+          list.appendChild(listItem);
+        });
+      } catch (error) {
+        console.error("Помилка завантаження даних:", error);
+      }
+    }
+
+    fetchShops();
+  </script>
+</body>
+</html>

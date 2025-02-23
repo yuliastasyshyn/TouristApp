@@ -38,31 +38,20 @@ document.getElementById('reviewForm').addEventListener('submit', async (event) =
         alert('Сталася помилка при відправленні відгуку.');
     }
 });
-
 async function fetchReviews() {
     const restaurantId = new URLSearchParams(window.location.search).get('restaurant_id');
-    console.log("Завантажуємо відгуки для ресторану з ID:", restaurantId);
 
     try {
         const response = await fetch(`http://localhost:5000/reviews?restaurant_id=${restaurantId}`);
-        console.log("Відповідь сервера (отримання відгуків):", response);
-
-        if (!response.ok) {
-            console.error('Помилка отримання відгуків:', await response.text());
-            return;
-        }
-
+        if (!response.ok) throw new Error(await response.text());
         const reviews = await response.json();
-        console.log("Отримані відгуки:", reviews);
 
         const container = document.getElementById('reviewsContainer');
         container.innerHTML = '';
-
         if (reviews.length === 0) {
             container.innerHTML = '<p>Поки що немає відгуків.</p>';
             return;
         }
-
         reviews.forEach(review => {
             const reviewElement = document.createElement('div');
             reviewElement.classList.add('review');
@@ -73,8 +62,14 @@ async function fetchReviews() {
             container.appendChild(reviewElement);
         });
 
+        const ratingResponse = await fetch(`http://localhost:5000/restaurants/${restaurantId}/rating`);
+        if (!ratingResponse.ok) throw new Error(await ratingResponse.text());
+        const { averageRating } = await ratingResponse.json();
+
+        document.getElementById('averageRating').textContent = `Середній рейтинг: ${averageRating.toFixed(1)} / 5 ⭐`;
+
     } catch (error) {
-        console.error('Помилка при отриманні відгуків:', error);
+        console.error('Помилка при отриманні даних:', error);
     }
 }
 
