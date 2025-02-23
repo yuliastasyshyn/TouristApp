@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Discover Lviv</title>
+  <title>Hidden Lion</title>
   <link rel="stylesheet" href="css/categories.css" />
   <script defer src="js/categories.js"></script>
- 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
   <header>
-    <h1>Discover Lviv</h1>
-    <p class="subtitle">Your guide to exploring the city</p>
+    <h1 id="title">Hidden Lion</h1>
+    <p class="subtitle" id="subtitle">Ваш гід по місту Львів</p>
+    <button id="theme-toggle">🌙</button> 
   </header>
 
   <div class="search-container">
-    <input type="text" id="search" placeholder="Search for attractions" />
+    <input type="text" id="search" placeholder="Пошук атракцій" />
     <button id="search-btn">🔍</button>
   </div>
 
@@ -25,23 +25,21 @@
     <div id="map"></div>
   </div>
 
-
   <div class="categories">
     <button id="landmarks-btn">
-        <img src="img/landmarks.png" alt="Landmarks" />
-        <span>Landmarks</span>
+        <img src="img/landmarks.logo.png" alt="Landmarks" />
+        <span id="landmarks-text">Пам'ятки</span>
     </button>
     <button id="restaurants-btn">
-        <img src="img/logo.restaurants.jpg" alt="Restaurants" />
-        <span>Restaurants</span>
+        <img src="img/logo.restaurants2.png" alt="Restaurants" />
+        <span id="restaurants-text">Ресторани</span>
     </button>
     <button id="shopping-btn">
-        <img src="img/shopping-logo.jpg" alt="Shopping" />
-        <span>Shopping</span>
+        <img src="img/shopping-logo2.png" alt="Shopping" />
+        <span id="shopping-text">Шопінг</span>
     </button>
   </div>
 
-  
   <div class="bottom-panel">
     
     <button id="home-btn">
@@ -60,5 +58,7 @@
     </a>
   </div>
 
+
+  <script src="js/translations.js"></script>
 </body>
 </html>

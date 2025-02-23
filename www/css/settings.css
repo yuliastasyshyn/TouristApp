@@ -1,6 +1,6 @@
 /* Загальні стилі */
 body {
-    font-family: Georgia, serif;
+    font-family: Arial, sans-serif;
     background-color: #dfdddd;
     margin: 0;
     padding: 20px;
@@ -27,7 +27,6 @@ h1 {
     color: #666;
     margin: 0;
 }
-
 
 
 /* Нижня панель з кнопками */

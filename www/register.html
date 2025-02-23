@@ -8,19 +8,20 @@
 </head>
 <body>
     <div class="app-container">
-        <h1>Реєстрація</h1>
-        <form>
-            <label for="username">Ім'я користувача</label>
+        <h1 id="register-title">Реєстрація</h1>
+        <form id="registerForm"> <!-- Додано id -->
+            <label id="label-username" for="username">Ім'я користувача</label>
             <input type="text" id="username" name="username" required><br>
             
-            <label for="password">Пароль</label>
+            <label id="label-password" for="password">Пароль</label>
             <input type="password" id="password" name="password" required><br>
 
-            <button type="submit" class="btn-register">Зареєструватися</button>
+            <button type="submit" class="btn-register" id="registerBtn">Зареєструватися</button>
         </form>
         <p>Вже маєте акаунт? <a href="login.html">Увійти</a></p>
     </div>
 
-    <script src="js/register.js"></script>
+    <script src="js/translations.js"></script>  
+    <script src="js/register.js"></script>  
 </body>
 </html>

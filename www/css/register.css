@@ -28,9 +28,6 @@ body {
     text-align: left;
 }
 
-.app-container:hover {
-    transform: translateY(-10px);
-}
 
 h1 {
     font-size: 2.5rem;
@@ -77,7 +74,7 @@ a:hover {
     font-size: 1.3rem;
     font-weight: 600;
     color: #fff;
-    background: linear-gradient(45deg, #828282, #828282); 
+    background: #02416b;
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -100,14 +97,6 @@ a:hover {
     transform: scale(0);
 }
 
-.btn-register:hover {
-    background: linear-gradient(45deg, #3e3e3e, #c1c1c1); 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn-register:hover::before {
-    transform: scale(1);
-}
 
 .btn-register:focus {
     outline: none;
@@ -126,14 +115,14 @@ a:hover {
 
     .btn-register {
         font-size: 1rem;
-        padding: 12px 24px;
+        padding: 16px 24px;
     }
 }
 
 @media screen and (prefers-color-scheme: dark) {
     body {
         background-color: #FFF;
-        color: #828282;
+        color: #0f0f0f;
     }
 
     .app-container {
@@ -142,25 +131,27 @@ a:hover {
     }
 
     h1 {
-        color: #828282; 
-    }
-
+        color: #084242;
+    } 
+    
     input {
         background-color: #efefef;
-        border-color: #666;
-        color: #484848;
+        border-color: #4a9488;
+        color: #202020;
     }
 
     input:focus {
-        border-color: #828282;
+        border-color: #005e75;
     }
 
     a {
-        color:  #828282
+        color: #9f0000;
+        text-decoration: underline;
     }
+    
 
     .btn-register {
-        background: linear-gradient(45deg,  #828282, #828282);
+        background: linear-gradient(45deg, #256464, #0e494d);
         color: #fff;
     }
 }

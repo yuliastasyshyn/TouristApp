@@ -1,21 +1,25 @@
-document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener("DOMContentLoaded", function () {
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const body = document.body;
 
-function onDeviceReady() {
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+    // Перевіряємо, чи є збережене значення в localStorage
+    if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-mode");
+    }
 
+    themeToggleBtn.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
 
-    var map = L.map('map').setView([49.8383, 24.0232], 13); 
+        // Зберігаємо вибір теми в localStorage
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.setItem("theme", "light");
+        }
+    });
+});
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    L.marker([49.8383, 24.0232]).addTo(map)
-        .bindPopup('Ласкаво просимо до Львова!')
-        .openPopup();
-}
-
+// Логіка кнопок
 document.getElementById('registerBtn').addEventListener('click', function() {
     window.location.href = 'register.html';
 });
@@ -33,6 +37,7 @@ document.getElementById('mapBtn').addEventListener('click', function() {
     window.location.href = 'map.html';
 });
 
-function handleClick(buttonName) {
-    alert(`Ви натиснули: ${buttonName}`);
+function changeLanguage(lang) {
+    localStorage.setItem('selectedLanguage', lang);
+    location.reload();
 }

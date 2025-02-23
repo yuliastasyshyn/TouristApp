@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (data.success) {
                 alert("✅ Вхід успішний! Перенаправляємо...");
                 setTimeout(() => {
-                    
+                  
                     window.location.href = data.redirect;
                 }, 1000);
             } else {

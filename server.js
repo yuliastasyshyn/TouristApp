@@ -8,10 +8,11 @@ const saltRounds = 10;
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:8000', 'http://localhost:8001'],
+    origin: ['http://localhost:8000', 'http://localhost:8001', 'http://localhost:5500'],
     methods: ['POST', 'GET'],
     credentials: true
 }));
+
 
 app.use(express.json());
 

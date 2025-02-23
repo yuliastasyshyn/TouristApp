@@ -21,9 +21,19 @@
             <button id="loginBtn" class="btn secondary">Увійти</button>
             <button id="continueBtn" class="btn continue">Продовжити без реєстрації</button>
             <button id="mapBtn" class="btn map">Переглянути карту</button>
+            
+            <!-- Кнопка перемикання теми -->
+            <button id="themeToggleBtn" class="btn theme-toggle">🌙 / ☀️</button>
+
+            <div class="language-switcher">
+                <a href="#" onclick="changeLanguage('uk')">UA</a> /
+                <a href="#" onclick="changeLanguage('en')">EN</a>
+            </div>
         </footer>
     </div>
 
+    <!-- Підключаємо скрипти -->
+    <script src="js/translations.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>
